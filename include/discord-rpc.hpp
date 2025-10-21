@@ -8,6 +8,7 @@
 #include <functional>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <string>
 
 #include "discord-rpc/command-queue.hpp"
@@ -21,8 +22,8 @@ namespace discord {
         std::string id;
         std::string username;
         std::string discriminator;
-        std::string global_name;
-        std::string avatar;
+        std::optional<std::string> global_name;
+        std::optional<std::string> avatar;
         bool bot = false;
         uint64_t flags = 0;
         int premium_type = 0;
