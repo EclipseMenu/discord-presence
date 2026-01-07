@@ -35,7 +35,9 @@ namespace discord {
     class Connection {
     private:
         Connection() noexcept = default;
-        ~Connection() noexcept = default;
+        ~Connection() noexcept {
+            this->close();
+        }
 
     public:
         static Connection& get() noexcept {
@@ -142,6 +144,10 @@ namespace discord {
         }
 
         void close() {
+            if (m_state == State::Disconnected) {
+                return;
+            }
+
             RPCManager::get().invokeOnDisconnected(toInt(m_lastError), m_lastErrorMessage);
             platform::PipeConnection::get().close();
             m_state = State::Disconnected;
