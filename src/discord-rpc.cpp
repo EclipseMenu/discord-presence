@@ -112,6 +112,9 @@ namespace discord {
             m_ioWorker = nullptr;
         }
 
+        this->clearPresence();
+        this->update();
+
         Connection::get().close();
         m_initialized = false;
 
